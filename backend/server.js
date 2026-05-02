@@ -26,20 +26,18 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS not allowed"));
-    }
-  },
+  origin: allowedOrigins,
+  credentials: true
+}));
+
+app.options("*", cors({
+  origin: allowedOrigins,
   credentials: true
 }));
 //add cookie parser middeleware
 app.use(exp.json());
 app.use(cookieParser())
 //body parser middleware
-app.options("*", cors());
 //path level middlewares
 app.use("/user-api", userApp);
 app.use("/author-api", authorApp);
@@ -107,10 +105,4 @@ app.use((err, req, res, next) => {
 
   //send server side error
   res.status(500).json({ message: "error occurred", error: "Server side error" });
-});
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://blog-app-yizu.vercel.app");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  next();
 });
