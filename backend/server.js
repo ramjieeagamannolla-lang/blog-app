@@ -17,12 +17,12 @@ const app = exp();
 //   credentials:true
 // }))
 // app.use(cors({
-//   origin: "https://blog-app-13-s3pi.onrender.com",
+//   origin: "https://blog-app-yizu.vercel.app/",
 //   credentials: true
 // }));
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://blog-app-hr9k.vercel.app/"
+  "https://blog-app-yizu.vercel.app/"
 ];
 
 app.use(cors({
