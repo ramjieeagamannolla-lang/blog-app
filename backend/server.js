@@ -22,7 +22,7 @@ const app = exp();
 // }));
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://blog-app-85wb.vercel.app"
+  "https://blog-app-hr9k.vercel.app/"
 ];
 
 app.use(cors({
