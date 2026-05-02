@@ -12,10 +12,14 @@ config();
 //create express app
 const app = exp();
 //enable cors
+// app.use(cors({
+//   origin:['http://localhost:5173'],
+//   credentials:true
+// }))
 app.use(cors({
-  origin:['http://localhost:5173'],
-  credentials:true
-}))
+  origin: "https://blog-app-13-s3pi.onrender.com",
+  credentials: true
+}));
 //add cookie parser middeleware
 app.use(cookieParser())
 //body parser middleware
@@ -27,19 +31,33 @@ app.use("/admin-api", adminApp);
 app.use("/auth", commonApp);
 
 //connect to db
-const connectDB = async () => {
-  try {
-    await connect(process.env.DB_URL);
-    console.log("DB server connected");
-    //assign port
-    const port = process.env.PORT;
-    app.listen(port, () => console.log(`server listening on ${port}..`));
-  } catch (err) {
-    console.log("err in db connect", err);
-  }
-};
+// const connectDB = async () => {
+//   try {
+//      const port = process.env.PORT||4000;
+//     app.listen(port, () => console.log(`server listening on ${port}..`));
+//     await connect(process.env.DB_URL);
+//     console.log("DB server connected");
 
-connectDB();
+//   } catch (err) {
+//     console.log("err in db connect", err);
+//   }
+// };
+const port = process.env.PORT || 4000;
+
+// Start server FIRST
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
+// Then connect DB
+connect(process.env.DB_URL)
+  .then(() => {
+    console.log("DB connected successfully");
+  })
+  .catch((err) => {
+    console.log("DB connection error:", err.message);
+  });
+
 
 //to handle invalid path
 app.use((req, res, next) => {
