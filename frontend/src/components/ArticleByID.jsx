@@ -50,7 +50,7 @@ function ArticleByID() {
       setLoading(true);
 
       try {
-        const res = await axios.get(`https://blog-app-13-s3pi.onrender.com/user-api/article/${id}`, { withCredentials: true });
+        const res = await axios.get(`https://blog-app-13-s3pi.onrender.com/user-api/articles/${id}`, { withCredentials: true });
 
         setArticle(res.data.payload);
       } catch (err) {
