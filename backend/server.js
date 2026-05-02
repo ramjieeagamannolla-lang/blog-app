@@ -11,6 +11,7 @@ config();
 
 //create express app
 const app = exp();
+app.options("*", cors());
 //enable cors
 // app.use(cors({
 //   origin:['http://localhost:5173'],
@@ -21,16 +22,16 @@ const app = exp();
 //   credentials: true
 // }));
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://blog-app-yizu.vercel.app/"
+  "http://localhost:5174",
+  "https://blog-app-yizu.vercel.app"
 ];
 
 app.use(cors({
-  origin: (origin, callback) => {
+  origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error("Not allowed by CORS"));
+      callback(new Error("CORS not allowed"));
     }
   },
   credentials: true
