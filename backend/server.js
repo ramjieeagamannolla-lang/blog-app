@@ -108,3 +108,9 @@ app.use((err, req, res, next) => {
   //send server side error
   res.status(500).json({ message: "error occurred", error: "Server side error" });
 });
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://blog-app-yizu.vercel.app");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  next();
+});
