@@ -11,7 +11,6 @@ config();
 
 //create express app
 const app = exp();
-app.options("*", cors());
 //enable cors
 // app.use(cors({
 //   origin:['http://localhost:5173'],
@@ -37,9 +36,10 @@ app.use(cors({
   credentials: true
 }));
 //add cookie parser middeleware
+app.use(exp.json());
 app.use(cookieParser())
 //body parser middleware
-app.use(exp.json());
+app.options("*", cors());
 //path level middlewares
 app.use("/user-api", userApp);
 app.use("/author-api", authorApp);
