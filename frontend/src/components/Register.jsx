@@ -52,7 +52,7 @@ function Register() {
 
       // ---------------- API CALL ----------------
       const res = await axios.post(
-        "https://blog-app-13-s3pi.onrender.com/auth/users",
+        "https://blog-app-real-1.onrender.com/auth/users",
         formData,
         {
           withCredentials: true,
